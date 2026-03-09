@@ -9,6 +9,13 @@ const COUNTIES_GEOJSON_URL = "/counties.geojson"
 const STATES_GEOJSON_URL = "/us-states.json"
 const STATE_CSV_URLS = [
     "/states/NC/NC_DATA.csv",
+    "/states/FL/FL_DATA.csv",
+    "/states/AL/AL_DATA.csv",
+    "/states/GA/GA_DATA.csv",
+    "/states/IL/IL_DATA.csv",
+    "/states/LA/LA_DATA.csv",
+    "/states/MS/MS_DATA.csv",
+    "/states/SC/SC_DATA.csv"
 ]
 
 const ZOOM_THRESHOLD = 6
@@ -23,6 +30,10 @@ const INITIAL_VIEW_STATE = {
 
 function normalizeFips(raw) {
   if (raw == null) return null
+  const num = parseFloat(raw)
+  if (!isNaN(num)) {
+    return String(Math.floor(num)).padStart(5, "0")
+  }
   const digits = String(raw).replace(/\D/g, "")
   if (!digits) return null
   return digits.padStart(5, "0")
@@ -125,9 +136,11 @@ export default function Map3D({ searchTerm }) {
             const fipsKey = normalizeFips(rawFips);
             if (!fipsKey) continue;
 
+            const hasSaifi = headers.includes("SAIFI");
             byFips[fipsKey] = {
                 county: rowObj.County,
                 saidi: Number(rowObj.SAIDI || 0),
+                saifi: hasSaifi ? Number(rowObj.SAIFI ?? 0) : null,
                 fips: fipsKey,
                 state: rowObj.State,
             };
@@ -177,18 +190,23 @@ export default function Map3D({ searchTerm }) {
     const byState = {}
     Object.values(metrics).forEach((m) => {
       const st = m.state || "Unknown"
-      if (!byState[st]) byState[st] = { state: st, total: 0, count: 0 }
+      if (!byState[st]) byState[st] = { state: st, saidiTotal: 0, saidiCount: 0, saifiTotal: 0, saifiCount: 0 }
       if (Number.isFinite(m.saidi)) {
-        byState[st].total += m.saidi
-        byState[st].count += 1
+        byState[st].saidiTotal += m.saidi
+        byState[st].saidiCount += 1
+      }
+      if (m.saifi !== null && Number.isFinite(m.saifi)) {
+        byState[st].saifiTotal += m.saifi
+        byState[st].saifiCount += 1
       }
     })
 
     const result = {}
     Object.keys(byState).forEach((st) => {
       const agg = byState[st]
-      const avg = agg.count > 0 ? agg.total / agg.count : 0
-      result[st] = { state: st, avgSaidi: avg }
+      const avgSaidi = agg.saidiCount > 0 ? agg.saidiTotal / agg.saidiCount : 0
+      const avgSaifi = agg.saifiCount > 0 ? agg.saifiTotal / agg.saifiCount : null
+      result[st] = { state: st, avgSaidi, avgSaifi }
     })
 
     return result
@@ -311,16 +329,18 @@ export default function Map3D({ searchTerm }) {
           getElevation: (f) => {
             const m = getStateMetric(f)
             if (!m) return 0
-            return m.avgSaidi * 2
+            const t = Math.max(0, Math.min(1, (m.avgSaidi - minSAIDI) / range))
+            return t * 100000
           },
           getFillColor: (f) => {
             const m = getStateMetric(f)
             if (!m) return [200, 200, 200, 200]
             const v = m.avgSaidi
-            const t = Math.max(0, Math.min(1, (v - minSAIDI) / range))
-            const r = 60 + 180 * t
-            const g = 200 - 150 * t
-            const b = 120
+            const tRaw = Math.max(0, Math.min(1, (v - minSAIDI) / range))
+            const t = Math.sqrt(tRaw)
+            const r = Math.round(50 + 205 * t)
+            const g = Math.round(200 - 175 * t)
+            const b = Math.round(50 * (1 - t))
             return [r, g, b, 220]
           },
           getLineColor: [40, 40, 40, 255],
@@ -345,6 +365,7 @@ export default function Map3D({ searchTerm }) {
               mode: "state",
               label: name || "Unknown state",
               saidi: m?.avgSaidi ?? null,
+              saifi: m?.avgSaifi ?? null,
             })
           },
         })
@@ -364,16 +385,18 @@ export default function Map3D({ searchTerm }) {
           getElevation: (f) => {
             const m = getCountyMetric(f)
             if (!m) return 0
-            return m.saidi * 2
+            const t = Math.max(0, Math.min(1, (m.saidi - minSAIDI) / range))
+            return t * 100000
           },
           getFillColor: (f) => {
             const m = getCountyMetric(f)
             if (!m) return [220, 220, 220, 180]
             const v = m.saidi
-            const t = Math.max(0, Math.min(1, (v - minSAIDI) / range))
-            const r = 60 + 180 * t
-            const g = 200 - 150 * t
-            const b = 100
+            const tRaw = Math.max(0, Math.min(1, (v - minSAIDI) / range))
+            const t = Math.sqrt(tRaw)
+            const r = Math.round(50 + 205 * t)
+            const g = Math.round(200 - 175 * t)
+            const b = Math.round(50 * (1 - t))
             return [r, g, b, 220]
           },
           getLineColor: [30, 30, 30, 255],
@@ -398,6 +421,7 @@ export default function Map3D({ searchTerm }) {
               mode: "county",
               label: name || "Unknown county",
               saidi: m?.saidi ?? null,
+              saifi: m?.saifi ?? null,
               fips: m?.fips ?? null,
             })
           },
@@ -443,7 +467,13 @@ export default function Map3D({ searchTerm }) {
           )}
           {hoverInfo.saidi != null && (
             <div>
-              SAIDI: {hoverInfo.saidi.toFixed(2)}
+              SAIDI: {hoverInfo.saidi.toFixed(4)}
+              {hoverInfo.mode === "state" && " (avg)"}
+            </div>
+          )}
+          {hoverInfo.saifi != null && (
+            <div>
+              SAIFI: {hoverInfo.saifi.toFixed(4)}
               {hoverInfo.mode === "state" && " (avg)"}
             </div>
           )}
