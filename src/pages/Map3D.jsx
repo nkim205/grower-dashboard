@@ -17,17 +17,6 @@ for (const state of READY_STATES) {
   STATE_CSV_URLS.push(`${BASE}states/${state}/${state}_DATA.csv`);
 }
 
-// const STATE_CSV_URLS = [
-//   "/states/NC/NC_DATA.csv",
-//   "/states/FL/FL_DATA.csv",
-//   "/states/AL/AL_DATA.csv",
-//   "/states/GA/GA_DATA.csv",
-//   "/states/IL/IL_DATA.csv",
-//   "/states/LA/LA_DATA.csv",
-//   "/states/MS/MS_DATA.csv",
-//   "/states/SC/SC_DATA.csv",
-// ];
-
 const ZOOM_THRESHOLD = 6;
 
 const INITIAL_VIEW_STATE = {
