@@ -76,6 +76,7 @@ export default function Map3D({ searchTerm }) {
   const [hoverInfo, setHoverInfo] = useState(null);
 
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
+  const [metric, setMetric] = useState("saidi");
 
   const containerRef = useRef(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
@@ -294,54 +295,57 @@ export default function Map3D({ searchTerm }) {
     }));
   }, [searchTerm, countiesGeojson, statesGeojson]);
 
+  // ---- Color scale tuning ----
+  // Anything at or above the cap gets the max color (red). Adjust per metric
+  // to control how sensitive the color scale is. Values above the cap all
+  // look the same shade of red.
+  const METRIC_CAPS = {
+    saidi: 0.05,
+    saifi: 0.05,
+  };
+
   // ---- layers logic stays the same as before (state vs county by zoom) ----
   const layers = useMemo(() => {
     const layers = [];
 
-    let minSAIDI = Infinity;
-    let maxSAIDI = -Infinity;
-    Object.values(metrics).forEach((m) => {
-      const v = m.saidi;
-      if (Number.isFinite(v)) {
-        if (v < minSAIDI) minSAIDI = v;
-        if (v > maxSAIDI) maxSAIDI = v;
-      }
-    });
-    if (!Number.isFinite(minSAIDI) || !Number.isFinite(maxSAIDI)) {
-      minSAIDI = 0;
-      maxSAIDI = 1;
-    }
-    const range = maxSAIDI - minSAIDI || 1;
+    const cap = METRIC_CAPS[metric];
+    const range = cap;
+
+    const getStateVal = (m) => (metric === "saidi" ? m?.avgSaidi : m?.avgSaifi) ?? null;
+    const getCountyVal = (m) => (metric === "saidi" ? m?.saidi : m?.saifi) ?? null;
+
+    const toColor = (v) => {
+      if (v === null) return null;
+      const t = Math.max(0, Math.min(1, v / range));
+      const r = t < 0.5 ? Math.round(50 + 410 * t) : 255;
+      const g = t < 0.5 ? Math.round(200 + 40 * t) : Math.round(220 - 400 * (t - 0.5));
+      return [r, g, 0, 220];
+    };
 
     if (statesGeojson && viewState.zoom < ZOOM_THRESHOLD) {
       layers.push(
         new GeoJsonLayer({
-          id: "states-saidi",
+          id: `states-${metric}`,
           data: statesGeojson,
           pickable: true,
           stroked: true,
           filled: true,
           extruded: true,
-          wireframe: false,
+          wireframe: true,
+          lineWidthUnits: "pixels",
           getElevation: (f) => {
             const m = getStateMetric(f);
-            if (!m) return 0;
-            const t = Math.max(0, Math.min(1, (m.avgSaidi - minSAIDI) / range));
-            return t * 100000;
+            const v = getStateVal(m);
+            if (v === null) return 0;
+            return Math.max(0, Math.min(1, v / range)) * 100000;
           },
           getFillColor: (f) => {
             const m = getStateMetric(f);
-            if (!m) return [200, 200, 200, 200];
-            const v = m.avgSaidi;
-            const tRaw = Math.max(0, Math.min(1, (v - minSAIDI) / range));
-            const t = Math.sqrt(tRaw);
-            const r = Math.round(50 + 205 * t);
-            const g = Math.round(200 - 175 * t);
-            const b = Math.round(50 * (1 - t));
-            return [r, g, b, 220];
+            const v = getStateVal(m);
+            return toColor(v) ?? [200, 200, 200, 200];
           },
-          getLineColor: [40, 40, 40, 255],
-          getLineWidth: 1.5,
+          getLineColor: [255, 255, 255, 180],
+          getLineWidth: 1,
           onHover: (info) => {
             const { object, x, y } = info;
             if (!object) {
@@ -372,31 +376,26 @@ export default function Map3D({ searchTerm }) {
     if (countiesGeojson && viewState.zoom >= ZOOM_THRESHOLD) {
       layers.push(
         new GeoJsonLayer({
-          id: "counties-saidi",
+          id: `counties-${metric}`,
           data: countiesGeojson,
           pickable: true,
           stroked: true,
           filled: true,
           extruded: true,
-          wireframe: false,
+          wireframe: true,
+          lineWidthUnits: "pixels",
           getElevation: (f) => {
             const m = getCountyMetric(f);
-            if (!m) return 0;
-            const t = Math.max(0, Math.min(1, (m.saidi - minSAIDI) / range));
-            return t * 100000;
+            const v = getCountyVal(m);
+            if (v === null) return 0;
+            return Math.max(0, Math.min(1, v / range)) * 100000;
           },
           getFillColor: (f) => {
             const m = getCountyMetric(f);
-            if (!m) return [220, 220, 220, 180];
-            const v = m.saidi;
-            const tRaw = Math.max(0, Math.min(1, (v - minSAIDI) / range));
-            const t = Math.sqrt(tRaw);
-            const r = Math.round(50 + 205 * t);
-            const g = Math.round(200 - 175 * t);
-            const b = Math.round(50 * (1 - t));
-            return [r, g, b, 220];
+            const v = getCountyVal(m);
+            return toColor(v) ?? [220, 220, 220, 180];
           },
-          getLineColor: [30, 30, 30, 255],
+          getLineColor: [255, 255, 255, 150],
           getLineWidth: 1,
           onHover: (info) => {
             const { object, x, y } = info;
@@ -427,7 +426,7 @@ export default function Map3D({ searchTerm }) {
     }
 
     return layers;
-  }, [countiesGeojson, statesGeojson, metrics, stateMetrics, viewState.zoom]);
+  }, [countiesGeojson, statesGeojson, metrics, stateMetrics, viewState.zoom, metric]);
 
   const { width, height } = size;
   const ready = width > 0 && height > 0;
@@ -447,6 +446,22 @@ export default function Map3D({ searchTerm }) {
           <Map mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json" />
         </DeckGL>
       )}
+
+      <div className="absolute bottom-4 left-4 z-10 flex rounded-full bg-slate-900/90 p-1 shadow-lg">
+        {["saidi", "saifi"].map((m) => (
+          <button
+            key={m}
+            onClick={() => setMetric(m)}
+            className={`rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wide transition-colors ${
+              metric === m
+                ? "bg-white text-slate-900"
+                : "text-white/60 hover:text-white"
+            }`}
+          >
+            {m}
+          </button>
+        ))}
+      </div>
 
       {hoverInfo && (
         <div
