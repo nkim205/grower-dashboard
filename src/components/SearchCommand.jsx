@@ -99,6 +99,17 @@ function getState(feature) {
   )
 }
 
+function getCountyFips(feature) {
+  const props = feature?.properties || {}
+  return (
+    props.GEOID ||
+    props.geoid ||
+    props.FIPS ||
+    props.fips ||
+    (props.STATEFP && props.COUNTYFP ? `${props.STATEFP}${props.COUNTYFP}` : "")
+  )
+}
+
 // simple fuzzy subsequence score
 function fuzzyScore(text, query) {
   if (!text || !query) return -1
@@ -202,9 +213,8 @@ export function SearchCommand({ onSearch, geojson }) {
     const name = getName(feature)
     const state = getState(feature)
 
-    // What the map search receives:
-    //   use JUST the county name so your existing logic still works
-    const searchTerm = name
+    const countyFips = getCountyFips(feature)
+    const searchTerm = countyFips ? `fips:${countyFips}` : `${name} ${state}`.trim()
 
     if (onSearch) {
       onSearch(searchTerm)   // 👈 send string, not object

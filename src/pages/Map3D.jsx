@@ -18,6 +18,14 @@ for (const state of READY_STATES) {
 }
 
 const ZOOM_THRESHOLD = 6;
+const MIN_ZOOM = 3.5;
+const MAX_ZOOM = 10;
+const US_BOUNDS = {
+  minLng: -127,
+  maxLng: -65,
+  minLat: 24,
+  maxLat: 50,
+};
 
 const INITIAL_VIEW_STATE = {
   longitude: -79.0,
@@ -69,6 +77,40 @@ function getFeatureCenter(feature) {
   };
 }
 
+function getFeatureBounds(feature) {
+  const geom = feature.geometry;
+  if (!geom || !geom.coordinates) return null;
+
+  let minLng = Infinity;
+  let maxLng = -Infinity;
+  let minLat = Infinity;
+  let maxLat = -Infinity;
+
+  const collect = (c) => {
+    if (!c) return;
+    if (typeof c[0] === "number") {
+      const [lng, lat] = c;
+      if (lng < minLng) minLng = lng;
+      if (lng > maxLng) maxLng = lng;
+      if (lat < minLat) minLat = lat;
+      if (lat > maxLat) maxLat = lat;
+    } else {
+      c.forEach(collect);
+    }
+  };
+
+  collect(geom.coordinates);
+  if (!Number.isFinite(minLng) || !Number.isFinite(maxLng) || !Number.isFinite(minLat) || !Number.isFinite(maxLat)) {
+    return null;
+  }
+
+  return { minLng, maxLng, minLat, maxLat };
+}
+
+function clamp(n, min, max) {
+  return Math.max(min, Math.min(max, n));
+}
+
 export default function Map3D({ searchTerm }) {
   const [countiesGeojson, setCountiesGeojson] = useState(null);
   const [statesGeojson, setStatesGeojson] = useState(null);
@@ -76,9 +118,20 @@ export default function Map3D({ searchTerm }) {
   const [hoverInfo, setHoverInfo] = useState(null);
 
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE);
+  const [metric, setMetric] = useState("saidi");
+  const [height3D, setHeight3D] = useState(true);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedFeature, setSelectedFeature] = useState(null);
+  const searchHighlightTimeoutRef = useRef(null);
 
   const containerRef = useRef(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
+  const constrainViewState = (vs) => ({
+    ...vs,
+    zoom: clamp(vs.zoom, MIN_ZOOM, MAX_ZOOM),
+    longitude: clamp(vs.longitude, US_BOUNDS.minLng, US_BOUNDS.maxLng),
+    latitude: clamp(vs.latitude, US_BOUNDS.minLat, US_BOUNDS.maxLat),
+  });
 
   useEffect(() => {
     const el = containerRef.current;
@@ -232,10 +285,34 @@ export default function Map3D({ searchTerm }) {
   // 🔍 search effect: fly to county or state
   useEffect(() => {
     const q = (searchTerm || "").trim().toLowerCase();
-    if (!q) return;
+    if (!q) {
+      if (searchHighlightTimeoutRef.current) {
+        clearTimeout(searchHighlightTimeoutRef.current);
+        searchHighlightTimeoutRef.current = null;
+      }
+      setSelectedLocation(null);
+      setSelectedFeature(null);
+      return;
+    }
     if (!countiesGeojson && !statesGeojson) return;
 
     let match = null;
+    const isFipsSearch = q.startsWith("fips:");
+    const fipsQuery = isFipsSearch ? normalizeFips(q.slice(5)) : null;
+
+    if (!match && fipsQuery && countiesGeojson) {
+      match = countiesGeojson.features.find((f) => {
+        const props = f.properties || {};
+        const rawFips =
+          props.FIPS ||
+          props.fips ||
+          props.GEOID ||
+          props.geoid ||
+          props.GEOID20 ||
+          (props.STATEFP && props.COUNTYFP ? `${props.STATEFP}${props.COUNTYFP}` : null);
+        return normalizeFips(rawFips) === fipsQuery;
+      });
+    }
 
     // County matcher
     const countyMatches = (f) => {
@@ -266,13 +343,40 @@ export default function Map3D({ searchTerm }) {
       return stateName.toLowerCase().includes(q);
     };
 
-    // 1) Try county first
-    if (!match && countiesGeojson) {
+    const countyExactMatches = (f) => {
+      const props = f.properties || {};
+      const countyName =
+        props.NAME ||
+        props.Name ||
+        props.name ||
+        props.COUNTY ||
+        props.County ||
+        "";
+      return countyName.toLowerCase() === q;
+    };
+
+    const stateExactMatches = (f) => {
+      const props = f.properties || {};
+      const stateName =
+        props.STATE_NAME ||
+        props.STATE ||
+        props.NAME ||
+        props.Name ||
+        props.name ||
+        "";
+      return stateName.toLowerCase() === q;
+    };
+
+    if (!match && !isFipsSearch && statesGeojson) {
+      match = statesGeojson.features.find(stateExactMatches);
+    }
+    if (!match && !isFipsSearch && countiesGeojson) {
+      match = countiesGeojson.features.find(countyExactMatches);
+    }
+    if (!match && !isFipsSearch && countiesGeojson) {
       match = countiesGeojson.features.find(countyMatches);
     }
-
-    // 2) Try state
-    if (!match && statesGeojson) {
+    if (!match && !isFipsSearch && statesGeojson) {
       match = statesGeojson.features.find(stateMatches);
     }
 
@@ -281,67 +385,148 @@ export default function Map3D({ searchTerm }) {
       return;
     }
 
-    const center = getFeatureCenter(match);
+    const bounds = getFeatureBounds(match);
+    const center = bounds
+      ? {
+          longitude: (bounds.minLng + bounds.maxLng) / 2,
+          latitude: (bounds.minLat + bounds.maxLat) / 2,
+        }
+      : getFeatureCenter(match);
     if (!center) return;
 
-    // Fly camera using functional state updater
-    setViewState((vs) => ({
-      ...vs,
-      longitude: center.longitude,
-      latitude: center.latitude,
-      zoom: Math.max(vs.zoom, ZOOM_THRESHOLD + 1),
-      transitionDuration: 800,
-    }));
+    const props = match.properties || {};
+    const countyFips = normalizeFips(
+      props.FIPS ||
+        props.fips ||
+        props.GEOID ||
+        props.geoid ||
+        props.GEOID20 ||
+        (props.STATEFP && props.COUNTYFP ? `${props.STATEFP}${props.COUNTYFP}` : null),
+    );
+    const stateName =
+      props.STATE_NAME || props.STATE || props.NAME || props.Name || props.name || null;
+
+    if (searchHighlightTimeoutRef.current) {
+      clearTimeout(searchHighlightTimeoutRef.current);
+      searchHighlightTimeoutRef.current = null;
+    }
+
+    let selectedMode = null;
+    if (countyFips) {
+      selectedMode = "county";
+      setSelectedLocation({ mode: "county", key: countyFips });
+      setSelectedFeature({ mode: "county", feature: match });
+    } else if (stateName) {
+      selectedMode = "state";
+      setSelectedLocation({ mode: "state", key: stateName.toLowerCase() });
+      setSelectedFeature({ mode: "state", feature: match });
+    }
+    searchHighlightTimeoutRef.current = setTimeout(() => {
+      setSelectedLocation(null);
+      setSelectedFeature(null);
+      searchHighlightTimeoutRef.current = null;
+    }, 2500);
+
+    const boundsWidth = bounds ? Math.max(0.01, bounds.maxLng - bounds.minLng) : 1;
+    const boundsHeight = bounds ? Math.max(0.01, bounds.maxLat - bounds.minLat) : 1;
+    const paddedSpan = Math.max(boundsWidth, boundsHeight * 1.35) * 1.35;
+    let targetZoom = clamp(Math.log2(360 / paddedSpan), MIN_ZOOM, MAX_ZOOM);
+    if (selectedMode === "county") {
+      targetZoom = Math.max(targetZoom, ZOOM_THRESHOLD + 0.8);
+    }
+
+    setViewState((vs) =>
+      constrainViewState({
+        ...vs,
+        longitude: center.longitude,
+        latitude: center.latitude,
+        zoom: targetZoom,
+        transitionDuration: 800,
+      }),
+    );
   }, [searchTerm, countiesGeojson, statesGeojson]);
+
+  useEffect(() => {
+    return () => {
+      if (searchHighlightTimeoutRef.current) {
+        clearTimeout(searchHighlightTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // ---- Color scale tuning ----
+  // Anything at or above the cap gets the max color (red). Adjust per metric
+  // to control how sensitive the color scale is. Values above the cap all
+  // look the same shade of red.
+  const METRIC_CAPS = {
+    saidi: 0.05,
+    saifi: 0.05,
+  };
 
   // ---- layers logic stays the same as before (state vs county by zoom) ----
   const layers = useMemo(() => {
     const layers = [];
 
-    let minSAIDI = Infinity;
-    let maxSAIDI = -Infinity;
-    Object.values(metrics).forEach((m) => {
-      const v = m.saidi;
-      if (Number.isFinite(v)) {
-        if (v < minSAIDI) minSAIDI = v;
-        if (v > maxSAIDI) maxSAIDI = v;
-      }
-    });
-    if (!Number.isFinite(minSAIDI) || !Number.isFinite(maxSAIDI)) {
-      minSAIDI = 0;
-      maxSAIDI = 1;
-    }
-    const range = maxSAIDI - minSAIDI || 1;
+    const cap = METRIC_CAPS[metric];
+    const range = cap;
+
+    const getStateVal = (m) => (metric === "saidi" ? m?.avgSaidi : m?.avgSaifi) ?? null;
+    const getCountyVal = (m) => (metric === "saidi" ? m?.saidi : m?.saifi) ?? null;
+    const isSelectedState = (feature) => {
+      if (!selectedLocation || selectedLocation.mode !== "state") return false;
+      const props = feature.properties || {};
+      const name =
+        props.STATE_NAME || props.STATE || props.NAME || props.Name || props.name;
+      return name?.toLowerCase() === selectedLocation.key;
+    };
+    const isSelectedCounty = (feature) => {
+      if (!selectedLocation || selectedLocation.mode !== "county") return false;
+      const props = feature.properties || {};
+      const rawFips =
+        props.FIPS ||
+        props.fips ||
+        props.GEOID ||
+        props.geoid ||
+        props.GEOID20 ||
+        (props.STATEFP && props.COUNTYFP ? `${props.STATEFP}${props.COUNTYFP}` : null);
+      return normalizeFips(rawFips) === selectedLocation.key;
+    };
+
+    const toColor = (v) => {
+      if (v === null) return null;
+      const t = Math.max(0, Math.min(1, v / range));
+      const r = t < 0.5 ? Math.round(50 + 410 * t) : 255;
+      const g = t < 0.5 ? Math.round(200 + 40 * t) : Math.round(220 - 400 * (t - 0.5));
+      return [r, g, 0, 220];
+    };
 
     if (statesGeojson && viewState.zoom < ZOOM_THRESHOLD) {
       layers.push(
         new GeoJsonLayer({
-          id: "states-saidi",
+          id: `states-${metric}`,
           data: statesGeojson,
           pickable: true,
+          autoHighlight: true,
+          highlightColor: [255, 255, 255, 220],
           stroked: true,
           filled: true,
-          extruded: true,
-          wireframe: false,
+          extruded: height3D,
+          wireframe: height3D,
+          lineWidthUnits: "pixels",
           getElevation: (f) => {
             const m = getStateMetric(f);
-            if (!m) return 0;
-            const t = Math.max(0, Math.min(1, (m.avgSaidi - minSAIDI) / range));
-            return t * 100000;
+            const v = getStateVal(m);
+            if (!height3D || v === null) return 0;
+            return Math.max(0, Math.min(1, v / range)) * 100000;
           },
           getFillColor: (f) => {
             const m = getStateMetric(f);
-            if (!m) return [200, 200, 200, 200];
-            const v = m.avgSaidi;
-            const tRaw = Math.max(0, Math.min(1, (v - minSAIDI) / range));
-            const t = Math.sqrt(tRaw);
-            const r = Math.round(50 + 205 * t);
-            const g = Math.round(200 - 175 * t);
-            const b = Math.round(50 * (1 - t));
-            return [r, g, b, 220];
+            const v = getStateVal(m);
+            if (isSelectedState(f)) return [255, 255, 120, 255];
+            return toColor(v) ?? [200, 200, 200, 200];
           },
-          getLineColor: [40, 40, 40, 255],
-          getLineWidth: 1.5,
+          getLineColor: (f) => (isSelectedState(f) ? [255, 255, 0, 255] : [255, 255, 255, 180]),
+          getLineWidth: (f) => (isSelectedState(f) ? 3 : 1),
           onHover: (info) => {
             const { object, x, y } = info;
             if (!object) {
@@ -372,32 +557,30 @@ export default function Map3D({ searchTerm }) {
     if (countiesGeojson && viewState.zoom >= ZOOM_THRESHOLD) {
       layers.push(
         new GeoJsonLayer({
-          id: "counties-saidi",
+          id: `counties-${metric}`,
           data: countiesGeojson,
           pickable: true,
+          autoHighlight: true,
+          highlightColor: [255, 255, 255, 220],
           stroked: true,
           filled: true,
-          extruded: true,
-          wireframe: false,
+          extruded: height3D,
+          wireframe: height3D,
+          lineWidthUnits: "pixels",
           getElevation: (f) => {
             const m = getCountyMetric(f);
-            if (!m) return 0;
-            const t = Math.max(0, Math.min(1, (m.saidi - minSAIDI) / range));
-            return t * 100000;
+            const v = getCountyVal(m);
+            if (!height3D || v === null) return 0;
+            return Math.max(0, Math.min(1, v / range)) * 100000;
           },
           getFillColor: (f) => {
             const m = getCountyMetric(f);
-            if (!m) return [220, 220, 220, 180];
-            const v = m.saidi;
-            const tRaw = Math.max(0, Math.min(1, (v - minSAIDI) / range));
-            const t = Math.sqrt(tRaw);
-            const r = Math.round(50 + 205 * t);
-            const g = Math.round(200 - 175 * t);
-            const b = Math.round(50 * (1 - t));
-            return [r, g, b, 220];
+            const v = getCountyVal(m);
+            if (isSelectedCounty(f)) return [255, 255, 120, 255];
+            return toColor(v) ?? [220, 220, 220, 180];
           },
-          getLineColor: [30, 30, 30, 255],
-          getLineWidth: 1,
+          getLineColor: (f) => (isSelectedCounty(f) ? [255, 255, 0, 255] : [255, 255, 255, 150]),
+          getLineWidth: (f) => (isSelectedCounty(f) ? 2 : 1),
           onHover: (info) => {
             const { object, x, y } = info;
             if (!object) {
@@ -426,8 +609,33 @@ export default function Map3D({ searchTerm }) {
       );
     }
 
+    if (
+      selectedFeature &&
+      selectedFeature.feature &&
+      ((selectedFeature.mode === "state" && viewState.zoom < ZOOM_THRESHOLD) ||
+        (selectedFeature.mode === "county" && viewState.zoom >= ZOOM_THRESHOLD))
+    ) {
+      layers.push(
+        new GeoJsonLayer({
+          id: `search-highlight-${selectedFeature.mode}`,
+          data: {
+            type: "FeatureCollection",
+            features: [selectedFeature.feature],
+          },
+          pickable: false,
+          stroked: true,
+          filled: true,
+          extruded: false,
+          getFillColor: [255, 255, 120, 140],
+          getLineColor: [255, 255, 0, 255],
+          lineWidthUnits: "pixels",
+          getLineWidth: selectedFeature.mode === "state" ? 4 : 3,
+        }),
+      );
+    }
+
     return layers;
-  }, [countiesGeojson, statesGeojson, metrics, stateMetrics, viewState.zoom]);
+  }, [countiesGeojson, statesGeojson, metrics, stateMetrics, viewState.zoom, metric, height3D, selectedLocation, selectedFeature]);
 
   const { width, height } = size;
   const ready = width > 0 && height > 0;
@@ -437,9 +645,9 @@ export default function Map3D({ searchTerm }) {
       {ready && (
         <DeckGL
           initialViewState={INITIAL_VIEW_STATE}
-          controller={true}
+          controller={{ minZoom: MIN_ZOOM, maxZoom: MAX_ZOOM }}
           viewState={viewState}
-          onViewStateChange={({ viewState: vs }) => setViewState(vs)}
+          onViewStateChange={({ viewState: vs }) => setViewState(constrainViewState(vs))}
           layers={layers}
           width={width}
           height={height}
@@ -447,6 +655,32 @@ export default function Map3D({ searchTerm }) {
           <Map mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json" />
         </DeckGL>
       )}
+
+      <div className="absolute bottom-4 left-4 z-10 flex rounded-full bg-slate-900/90 p-1 shadow-lg">
+        {["saidi", "saifi"].map((m) => (
+          <button
+            key={m}
+            onClick={() => setMetric(m)}
+            className={`rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wide transition-colors ${
+              metric === m
+                ? "bg-white text-slate-900"
+                : "text-white/60 hover:text-white"
+            }`}
+          >
+            {m}
+          </button>
+        ))}
+      </div>
+      <div className="absolute bottom-4 left-44 z-10 flex rounded-full bg-slate-900/90 p-1 shadow-lg">
+        <button
+          onClick={() => setHeight3D((v) => !v)}
+          className={`rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wide transition-colors ${
+            height3D ? "bg-white text-slate-900" : "text-white/60 hover:text-white"
+          }`}
+        >
+          {height3D ? "3D ON" : "3D OFF"}
+        </button>
+      </div>
 
       {hoverInfo && (
         <div

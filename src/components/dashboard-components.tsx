@@ -25,6 +25,8 @@ import {
 
 import { SearchCommand } from "@/components/SearchCommand"   // fuzzy command palette
 
+const BASE = import.meta.env.BASE_URL
+
 export default function Navbar({ currentPage, onNavigate, onSearch }) {
   const [geojson, setGeojson] = React.useState(null)
 
@@ -42,7 +44,7 @@ export default function Navbar({ currentPage, onNavigate, onSearch }) {
   React.useEffect(() => {
     const loadGeoJSON = async () => {
       try {
-        const res = await fetch("/counties.geojson")
+        const res = await fetch(`${BASE}counties.geojson`)
         const data = await res.json()
         setGeojson(data)
       } catch (err) {
