@@ -5,23 +5,23 @@ import os
 import argparse
 from dotenv import load_dotenv
 
+STATES = ["AL", "FL", "GA", "IL", "LA", "MS", "NC", "SC"]
+BUCKET = "state-metrics"
+
 # Load AWS credentials from .env
 load_dotenv()
 
-def download_state_data(state: str):
+def download_state_data(s3, state: str):
     state = state.upper()
-    bucket = "state-metrics"
     key = f"{state}_DATA.csv"
 
     local_path = os.path.join("public", "states", state, f"{state}_DATA.csv")
 
-    print(f"Attempting to download {key} from {bucket}...")
-
-    s3 = boto3.client("s3")
+    print(f"Attempting to download {key} from {BUCKET}...")
 
     try:
         # Get file from S3
-        obj = s3.get_object(Bucket=bucket, Key=key)
+        obj = s3.get_object(Bucket=BUCKET, Key=key)
 
         # Read into pandas
         df = pd.read_csv(io.BytesIO(obj["Body"].read()))
@@ -45,11 +45,15 @@ def download_state_data(state: str):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Download state metrics data from S3")
-    parser.add_argument("state", type=str, help="State abbreviation (sc, ga, al, ex.)")
-    args = parser.parse_args()
+    #parser = argparse.ArgumentParser(description="Download state metrics data from S3")
+    #parser.add_argument("state", type=str, help="State abbreviation (sc, ga, al, ex.)")
+    #args = parser.parse_args()
 
-    download_state_data(args.state)
+    #download_state_data(args.state)
+    s3 = boto3.client("s3")
+
+    for state in STATES:
+        download_state_data(s3, state)
 
 
 if __name__ == "__main__":
