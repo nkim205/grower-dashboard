@@ -25,7 +25,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        branch: ${{ github.event_name == 'schedule' && fromJSON('["main"]') || fromJSON(format('["0"]', github.ref_name)) }}
+        branch: ${{ github.event_name == 'schedule' && fromJSON('["main"]') || fromJSON(format('["{0}"]', github.ref_name)) }}
 
     steps:
       - name: Checkout repository
