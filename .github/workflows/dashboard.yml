@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 env:
   PYTHON_VERSION: "3.11"
@@ -22,10 +22,16 @@ jobs:
   dashboard-refresh:
     name: Update dashboard data
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        branch: [dev, main]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.2.2
+        with:
+          ref: ${{ matrix.branch }}
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5.4.0
@@ -46,3 +52,11 @@ jobs:
       - name: Run dashboard data retrieval
         run: |
           python retrieveS3ForDash.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --staged --quiet || git commit -m "chore: update daily dashboard files"
+          git push origin HEAD:${{ matrix.branch }}
