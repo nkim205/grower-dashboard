@@ -1,12 +1,12 @@
 County,FIPS,SAIDI,LOWER_SAIFI,SAIFI,UPPER_SAIFI,State,Date
 Abbeville,45001,0.003,0.004,0.004,0.004,South Carolina,2026-04-22
-Aiken,45003,0.0017,0.0005,0.0007,0.0009,South Carolina,2026-04-22
+Aiken,45003,0.0018,0.0005,0.0007,0.0009,South Carolina,2026-04-22
 Allendale,45005,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-04-22
 Anderson,45007,0.0,0.0,0.0,0.0,South Carolina,2026-04-22
 Bamberg,45009,0.0001,0.0003,0.0003,0.0003,South Carolina,2026-04-22
-Barnwell,45011,0.0019,0.0007,0.0007,0.0007,South Carolina,2026-04-22
+Barnwell,45011,0.002,0.0008,0.0008,0.0008,South Carolina,2026-04-22
 Beaufort,45013,0.0003,0.0004,0.0004,0.0004,South Carolina,2026-04-22
-Berkeley,45015,0.0102,0.005,0.0051,0.0051,South Carolina,2026-04-22
+Berkeley,45015,0.0118,0.005,0.0051,0.0051,South Carolina,2026-04-22
 Calhoun,45017,0.0034,0.0036,0.0036,0.0036,South Carolina,2026-04-22
 Charleston,45019,0.0007,0.0002,0.0004,0.0006,South Carolina,2026-04-22
 Cherokee,45021,0.0,0.0,0.0,0.0,South Carolina,2026-04-22
@@ -30,7 +30,7 @@ Kershaw,45055,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-04-22
 Lancaster,45057,0.0,0.0,0.0,0.0,South Carolina,2026-04-22
 Laurens,45059,0.0,0.0,0.0,0.0,South Carolina,2026-04-22
 Lee,45061,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-04-22
-Lexington,45063,0.0003,0.0001,0.0002,0.0002,South Carolina,2026-04-22
+Lexington,45063,0.0003,0.0002,0.0002,0.0003,South Carolina,2026-04-22
 Marion,45067,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-04-22
 Marlboro,45069,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-04-22
 Mccormick,45065,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-04-22
