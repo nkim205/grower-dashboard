@@ -1,12 +1,12 @@
 County,FIPS,SAIDI,LOWER_SAIFI,SAIFI,UPPER_SAIFI,State,Date
-Abbeville,45001,0.0036,0.0038,0.004,0.0041,South Carolina,2026-04-24
-Aiken,45003,0.0013,0.0009,0.0009,0.001,South Carolina,2026-04-24
+Abbeville,45001,0.0045,0.0038,0.004,0.0041,South Carolina,2026-04-24
+Aiken,45003,0.0014,0.0009,0.001,0.001,South Carolina,2026-04-24
 Allendale,45005,0.0005,0.0003,0.0003,0.0003,South Carolina,2026-04-24
 Anderson,45007,0.0,0.0,0.0,0.0,South Carolina,2026-04-24
 Bamberg,45009,0.0003,0.0003,0.0003,0.0003,South Carolina,2026-04-24
 Barnwell,45011,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-04-24
 Beaufort,45013,0.0006,0.0002,0.0002,0.0002,South Carolina,2026-04-24
-Berkeley,45015,0.001,0.0013,0.0016,0.0019,South Carolina,2026-04-24
+Berkeley,45015,0.0011,0.0013,0.0016,0.0019,South Carolina,2026-04-24
 Calhoun,45017,0.0067,0.005,0.005,0.005,South Carolina,2026-04-24
 Charleston,45019,0.0005,0.0001,0.0001,0.0002,South Carolina,2026-04-24
 Cherokee,45021,0.0,0.0,0.0,0.0,South Carolina,2026-04-24
@@ -38,7 +38,7 @@ Newberry,45071,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-04-24
 Oconee,45073,0.0,0.0,0.0,0.0,South Carolina,2026-04-24
 Orangeburg,45075,0.002,0.0011,0.0014,0.0017,South Carolina,2026-04-24
 Pickens,45077,0.0,0.0,0.0,0.0,South Carolina,2026-04-24
-Richland,45079,0.0002,0.0001,0.0001,0.0002,South Carolina,2026-04-24
+Richland,45079,0.0002,0.0001,0.0002,0.0002,South Carolina,2026-04-24
 Saluda,45081,0.0013,0.0005,0.0005,0.0005,South Carolina,2026-04-24
 Spartanburg,45083,<0.0001,0.0001,0.0001,0.0001,South Carolina,2026-04-24
 Sumter,45085,0.0,0.0,0.0,0.0,South Carolina,2026-04-24
