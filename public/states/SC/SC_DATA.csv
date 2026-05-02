@@ -1,8 +1,8 @@
 County,FIPS,SAIDI,LOWER_SAIFI,SAIFI,UPPER_SAIFI,State,Date
-Abbeville,45001,0.0021,0.0018,0.0018,0.0018,South Carolina,2026-05-01
-Aiken,45003,0.0006,0.0002,0.0003,0.0003,South Carolina,2026-05-01
+Abbeville,45001,0.0022,0.0021,0.0021,0.0021,South Carolina,2026-05-01
+Aiken,45003,0.0007,0.0002,0.0003,0.0003,South Carolina,2026-05-01
 Allendale,45005,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-01
-Anderson,45007,0.0026,0.0053,0.0053,0.0053,South Carolina,2026-05-01
+Anderson,45007,0.004,0.0053,0.0053,0.0053,South Carolina,2026-05-01
 Bamberg,45009,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-01
 Barnwell,45011,0.001,0.0006,0.0006,0.0006,South Carolina,2026-05-01
 Beaufort,45013,0.002,0.0016,0.0016,0.0016,South Carolina,2026-05-01
@@ -13,7 +13,7 @@ Cherokee,45021,0.0031,0.0031,0.0031,0.0031,South Carolina,2026-05-01
 Chester,45023,0.0,0.0,0.0,0.0,South Carolina,2026-05-01
 Chesterfield,45025,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-01
 Clarendon,45027,0.0,0.0,0.0,0.0,South Carolina,2026-05-01
-Colleton,45029,0.0044,0.0037,0.0051,0.0065,South Carolina,2026-05-01
+Colleton,45029,0.0045,0.0037,0.0051,0.0065,South Carolina,2026-05-01
 Darlington,45031,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-01
 Dillon,45033,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-01
 Dorchester,45035,0.0101,0.0193,0.0196,0.0198,South Carolina,2026-05-01
@@ -25,7 +25,7 @@ Greenville,45045,0.0,0.0,0.0,0.0,South Carolina,2026-05-01
 Greenwood,45047,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-01
 Hampton,45049,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-01
 Horry,45051,0.0007,0.0023,0.0023,0.0023,South Carolina,2026-05-01
-Jasper,45053,0.0009,0.0007,0.0007,0.0007,South Carolina,2026-05-01
+Jasper,45053,0.001,0.0007,0.0007,0.0007,South Carolina,2026-05-01
 Kershaw,45055,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-01
 Lancaster,45057,0.0,0.0,0.0,0.0,South Carolina,2026-05-01
 Laurens,45059,0.0,0.0,0.0,0.0,South Carolina,2026-05-01
