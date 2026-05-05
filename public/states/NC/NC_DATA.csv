@@ -1,5 +1,5 @@
 County,FIPS,SAIDI,LOWER_SAIFI,SAIFI,UPPER_SAIFI,State,Date
-Alamance,37001,0.0264,0.0152,0.0152,0.0152,North Carolina,2026-05-04
+Alamance,37001,0.0266,0.0152,0.0152,0.0152,North Carolina,2026-05-04
 Alexander,37003,<0.0001,0.0001,0.0001,0.0001,North Carolina,2026-05-04
 Alleghany,37005,0.0,0.0,0.0,0.0,North Carolina,2026-05-04
 Anson,37007,0.0002,0.0001,0.0001,0.0001,North Carolina,2026-05-04
@@ -24,7 +24,7 @@ Clay,37043,0.0,0.0,0.0,0.0,North Carolina,2026-05-04
 Cleveland,37045,0.0,0.0,0.0,0.0,North Carolina,2026-05-04
 Columbus,37047,0.0,0.0,0.0,0.0,North Carolina,2026-05-04
 Craven,37049,0.0,0.0,0.0,0.0,North Carolina,2026-05-04
-Cumberland,37051,0.0714,0.0058,0.0058,0.0058,North Carolina,2026-05-04
+Cumberland,37051,0.0714,0.0059,0.0059,0.0059,North Carolina,2026-05-04
 Currituck,37053,0.0,0.0,0.0,0.0,North Carolina,2026-05-04
 Dare,37055,0.0,0.0,0.0,0.0,North Carolina,2026-05-04
 Davidson,37057,0.0013,0.0007,0.0007,0.0008,North Carolina,2026-05-04
