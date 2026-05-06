@@ -1,5 +1,5 @@
 County,FIPS,SAIDI,LOWER_SAIFI,SAIFI,UPPER_SAIFI,State,Date
-Alamance,37001,0.0008,0.0011,0.0011,0.0011,North Carolina,2026-05-05
+Alamance,37001,0.0009,0.0011,0.0011,0.0011,North Carolina,2026-05-05
 Alexander,37003,0.0007,0.0012,0.0012,0.0012,North Carolina,2026-05-05
 Alleghany,37005,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Anson,37007,0.003,0.0011,0.0012,0.0012,North Carolina,2026-05-05
@@ -19,7 +19,7 @@ Caswell,37033,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Catawba,37035,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Chatham,37037,0.0001,0.0005,0.0005,0.0005,North Carolina,2026-05-05
 Cherokee,37039,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
-Chowan,37041,0.0006,0.0004,0.0004,0.0004,North Carolina,2026-05-05
+Chowan,37041,0.0007,0.0004,0.0004,0.0004,North Carolina,2026-05-05
 Clay,37043,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Cleveland,37045,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Columbus,37047,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
@@ -49,11 +49,11 @@ Hoke,37093,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Hyde,37095,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Iredell,37097,0.0008,0.0008,0.0008,0.0009,North Carolina,2026-05-05
 Jackson,37099,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
-Johnston,37101,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
+Johnston,37101,0.0001,0.0004,0.0004,0.0004,North Carolina,2026-05-05
 Jones,37103,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Lee,37105,0.3389,0.0633,0.0633,0.0633,North Carolina,2026-05-05
 Lenoir,37107,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
-Lincoln,37109,0.0008,0.0033,0.0033,0.0033,North Carolina,2026-05-05
+Lincoln,37109,0.0017,0.0033,0.0033,0.0033,North Carolina,2026-05-05
 Macon,37113,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Madison,37115,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Martin,37117,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
@@ -61,7 +61,7 @@ Mcdowell,37111,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Mecklenburg,37119,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Mitchell,37121,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Montgomery,37123,0.0016,0.0004,0.0004,0.0004,North Carolina,2026-05-05
-Moore,37125,0.1103,0.0474,0.0581,0.0689,North Carolina,2026-05-05
+Moore,37125,0.1104,0.0474,0.0581,0.0689,North Carolina,2026-05-05
 Nash,37127,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 New Hanover,37129,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
 Northampton,37131,0.0,0.0,0.0,0.0,North Carolina,2026-05-05
