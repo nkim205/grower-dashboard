@@ -2,7 +2,7 @@ County,FIPS,SAIDI,LOWER_SAIFI,SAIFI,UPPER_SAIFI,State,Date
 Alamance,37001,0.0002,0.0004,0.0004,0.0004,North Carolina,2026-05-15
 Alexander,37003,0.0008,0.0003,0.0003,0.0003,North Carolina,2026-05-15
 Alleghany,37005,0.0,0.0,0.0,0.0,North Carolina,2026-05-15
-Anson,37007,0.0014,0.003,0.003,0.003,North Carolina,2026-05-15
+Anson,37007,0.0018,0.003,0.003,0.003,North Carolina,2026-05-15
 Ashe,37009,0.0,0.0,0.0,0.0,North Carolina,2026-05-15
 Avery,37011,0.0,0.0,0.0,0.0,North Carolina,2026-05-15
 Beaufort,37013,0.0,0.0,0.0,0.0,North Carolina,2026-05-15
@@ -74,7 +74,7 @@ Perquimans,37143,0.0,0.0,0.0,0.0,North Carolina,2026-05-15
 Person,37145,0.0,0.0,0.0,0.0,North Carolina,2026-05-15
 Pitt,37147,0.0,0.0,0.0,0.0,North Carolina,2026-05-15
 Polk,37149,0.0,0.0,0.0,0.0,North Carolina,2026-05-15
-Randolph,37151,0.0048,0.001,0.0012,0.0013,North Carolina,2026-05-15
+Randolph,37151,0.0052,0.001,0.0012,0.0013,North Carolina,2026-05-15
 Richmond,37153,0.0091,0.012,0.012,0.012,North Carolina,2026-05-15
 Robeson,37155,0.0,0.0,0.0,0.0,North Carolina,2026-05-15
 Rockingham,37157,0.0,0.0,0.0,0.0,North Carolina,2026-05-15
