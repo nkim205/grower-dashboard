@@ -1,5 +1,5 @@
 County,FIPS,SAIDI,LOWER_SAIFI,SAIFI,UPPER_SAIFI,State,Date
-Abbeville,45001,0.0066,0.0041,0.0077,0.0113,South Carolina,2026-05-19
+Abbeville,45001,0.0069,0.0041,0.0077,0.0113,South Carolina,2026-05-19
 Aiken,45003,0.0006,0.0002,0.0002,0.0002,South Carolina,2026-05-19
 Allendale,45005,0.1978,0.1273,0.1273,0.1273,South Carolina,2026-05-19
 Anderson,45007,0.0268,0.0268,0.0268,0.0268,South Carolina,2026-05-19
@@ -13,7 +13,7 @@ Cherokee,45021,0.0004,0.0002,0.0002,0.0002,South Carolina,2026-05-19
 Chester,45023,0.0,0.0,0.0,0.0,South Carolina,2026-05-19
 Chesterfield,45025,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-19
 Clarendon,45027,0.0,0.0,0.0,0.0,South Carolina,2026-05-19
-Colleton,45029,0.0004,0.0006,0.0006,0.0006,South Carolina,2026-05-19
+Colleton,45029,0.0005,0.0006,0.0006,0.0006,South Carolina,2026-05-19
 Darlington,45031,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-19
 Dillon,45033,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-19
 Dorchester,45035,0.0002,0.0001,0.0002,0.0002,South Carolina,2026-05-19
