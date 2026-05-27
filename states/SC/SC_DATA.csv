@@ -4,7 +4,7 @@ Aiken,45003,0.0086,0.0083,0.0091,0.01,South Carolina,2026-05-26
 Allendale,45005,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-26
 Anderson,45007,0.0,0.0,0.0,0.0,South Carolina,2026-05-26
 Bamberg,45009,0.0007,0.0003,0.0003,0.0003,South Carolina,2026-05-26
-Barnwell,45011,0.0142,0.0036,0.0036,0.0036,South Carolina,2026-05-26
+Barnwell,45011,0.0138,0.0036,0.0036,0.0036,South Carolina,2026-05-26
 Beaufort,45013,0.0089,0.017,0.0171,0.0172,South Carolina,2026-05-26
 Berkeley,45015,0.0002,0.0001,0.0001,0.0001,South Carolina,2026-05-26
 Calhoun,45017,0.0245,0.0121,0.0121,0.0121,South Carolina,2026-05-26
@@ -16,9 +16,9 @@ Clarendon,45027,0.0,0.0,0.0,0.0,South Carolina,2026-05-26
 Colleton,45029,0.0122,0.0074,0.0132,0.019,South Carolina,2026-05-26
 Darlington,45031,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-26
 Dillon,45033,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-26
-Dorchester,45035,0.0059,0.0016,0.0075,0.0134,South Carolina,2026-05-26
+Dorchester,45035,0.0063,0.0016,0.0083,0.015,South Carolina,2026-05-26
 Edgefield,45037,0.0126,0.0124,0.0124,0.0124,South Carolina,2026-05-26
-Fairfield,45039,0.0648,0.0322,0.0322,0.0322,South Carolina,2026-05-26
+Fairfield,45039,0.05,0.0322,0.0322,0.0322,South Carolina,2026-05-26
 Florence,45041,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-26
 Georgetown,45043,0.0003,0.0003,0.0003,0.0003,South Carolina,2026-05-26
 Greenville,45045,0.0,0.0,0.0,0.0,South Carolina,2026-05-26
@@ -38,7 +38,7 @@ Newberry,45071,0.0646,0.0523,0.0523,0.0523,South Carolina,2026-05-26
 Oconee,45073,0.0,0.0,0.0,0.0,South Carolina,2026-05-26
 Orangeburg,45075,0.0007,0.0002,0.0002,0.0002,South Carolina,2026-05-26
 Pickens,45077,0.0,0.0,0.0,0.0,South Carolina,2026-05-26
-Richland,45079,0.0191,0.0082,0.0114,0.0146,South Carolina,2026-05-26
+Richland,45079,0.019,0.0082,0.0114,0.0146,South Carolina,2026-05-26
 Saluda,45081,0.0051,0.0049,0.0049,0.0049,South Carolina,2026-05-26
 Spartanburg,45083,0.0066,0.0056,0.0067,0.0078,South Carolina,2026-05-26
 Sumter,45085,0.0,0.0,0.0,0.0,South Carolina,2026-05-26
