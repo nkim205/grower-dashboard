@@ -1,14 +1,14 @@
 County,FIPS,SAIDI,LOWER_SAIFI,SAIFI,UPPER_SAIFI,State,Date
 Abbeville,45001,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-28
 Aiken,45003,0.0007,0.0002,0.0003,0.0004,South Carolina,2026-05-28
-Allendale,45005,0.0002,0.0003,0.0003,0.0003,South Carolina,2026-05-28
+Allendale,45005,0.0003,0.0003,0.0003,0.0003,South Carolina,2026-05-28
 Anderson,45007,0.0,0.0,0.0,0.0,South Carolina,2026-05-28
 Bamberg,45009,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-28
 Barnwell,45011,0.0083,0.009,0.009,0.009,South Carolina,2026-05-28
 Beaufort,45013,0.0015,0.0014,0.0014,0.0014,South Carolina,2026-05-28
 Berkeley,45015,0.0038,0.0117,0.012,0.0123,South Carolina,2026-05-28
 Calhoun,45017,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-28
-Charleston,45019,0.0036,0.0005,0.004,0.0076,South Carolina,2026-05-28
+Charleston,45019,0.0037,0.0005,0.0041,0.0076,South Carolina,2026-05-28
 Cherokee,45021,0.0009,0.002,0.002,0.002,South Carolina,2026-05-28
 Chester,45023,0.0,0.0,0.0,0.0,South Carolina,2026-05-28
 Chesterfield,45025,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-05-28
