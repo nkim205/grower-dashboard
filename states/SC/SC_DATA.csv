@@ -1,22 +1,22 @@
 County,FIPS,SAIDI,LOWER_SAIFI,SAIFI,UPPER_SAIFI,State,Date
-Abbeville,45001,0.005,0.0018,0.0018,0.0018,South Carolina,2026-06-13
+Abbeville,45001,0.0055,0.0018,0.0018,0.0018,South Carolina,2026-06-13
 Aiken,45003,0.0002,0.0002,0.0002,0.0002,South Carolina,2026-06-13
-Allendale,45005,0.0239,0.0023,0.0023,0.0023,South Carolina,2026-06-13
+Allendale,45005,0.0242,0.0023,0.0023,0.0023,South Carolina,2026-06-13
 Anderson,45007,0.0,0.0,0.0,0.0,South Carolina,2026-06-13
 Bamberg,45009,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-06-13
 Barnwell,45011,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-06-13
 Beaufort,45013,0.0003,0.0002,0.0002,0.0002,South Carolina,2026-06-13
 Berkeley,45015,0.0005,0.0003,0.0004,0.0006,South Carolina,2026-06-13
 Calhoun,45017,0.0031,0.0028,0.0028,0.0028,South Carolina,2026-06-13
-Charleston,45019,0.0031,0.0005,0.0013,0.0021,South Carolina,2026-06-13
+Charleston,45019,0.0032,0.0005,0.0014,0.0022,South Carolina,2026-06-13
 Cherokee,45021,0.0003,0.0001,0.0001,0.0001,South Carolina,2026-06-13
 Chester,45023,0.0,0.0,0.0,0.0,South Carolina,2026-06-13
 Chesterfield,45025,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-06-13
 Clarendon,45027,0.0,0.0,0.0,0.0,South Carolina,2026-06-13
-Colleton,45029,0.0063,0.0153,0.0187,0.0221,South Carolina,2026-06-13
+Colleton,45029,0.0117,0.0155,0.0263,0.0372,South Carolina,2026-06-13
 Darlington,45031,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-06-13
 Dillon,45033,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-06-13
-Dorchester,45035,0.0371,0.024,0.0428,0.0616,South Carolina,2026-06-13
+Dorchester,45035,0.0376,0.024,0.0428,0.0616,South Carolina,2026-06-13
 Edgefield,45037,0.0004,0.0001,0.0001,0.0001,South Carolina,2026-06-13
 Fairfield,45039,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-06-13
 Florence,45041,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-06-13
@@ -38,7 +38,7 @@ Newberry,45071,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-06-13
 Oconee,45073,0.0,0.0,0.0,0.0,South Carolina,2026-06-13
 Orangeburg,45075,0.0023,0.0011,0.0011,0.0011,South Carolina,2026-06-13
 Pickens,45077,0.0,0.0,0.0,0.0,South Carolina,2026-06-13
-Richland,45079,0.0006,0.0004,0.0004,0.0004,South Carolina,2026-06-13
+Richland,45079,0.0007,0.0004,0.0004,0.0004,South Carolina,2026-06-13
 Saluda,45081,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-06-13
 Spartanburg,45083,0.0002,0.0001,0.0001,0.0001,South Carolina,2026-06-13
 Sumter,45085,0.0,0.0,0.0,0.0,South Carolina,2026-06-13
