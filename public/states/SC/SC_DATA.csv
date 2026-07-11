@@ -1,14 +1,14 @@
 County,FIPS,SAIDI,LOWER_SAIFI,SAIFI,UPPER_SAIFI,State,Date
 Abbeville,45001,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-10
-Aiken,45003,0.0571,0.028,0.0291,0.0302,South Carolina,2026-07-10
+Aiken,45003,0.0578,0.028,0.0291,0.0302,South Carolina,2026-07-10
 Allendale,45005,0.0035,0.002,0.002,0.002,South Carolina,2026-07-10
 Anderson,45007,0.0,0.0,0.0,0.0,South Carolina,2026-07-10
 Bamberg,45009,0.0013,0.0006,0.0006,0.0006,South Carolina,2026-07-10
 Barnwell,45011,0.0034,0.0015,0.0015,0.0015,South Carolina,2026-07-10
 Beaufort,45013,0.0568,0.0422,0.0571,0.072,South Carolina,2026-07-10
-Berkeley,45015,0.011,0.0078,0.0199,0.032,South Carolina,2026-07-10
-Calhoun,45017,0.0933,0.0391,0.0391,0.0391,South Carolina,2026-07-10
-Charleston,45019,0.0525,0.0166,0.1065,0.1964,South Carolina,2026-07-10
+Berkeley,45015,0.0114,0.0078,0.0206,0.0334,South Carolina,2026-07-10
+Calhoun,45017,0.0985,0.0391,0.0391,0.0391,South Carolina,2026-07-10
+Charleston,45019,0.0547,0.0166,0.11,0.2034,South Carolina,2026-07-10
 Cherokee,45021,0.0419,0.0548,0.0548,0.0548,South Carolina,2026-07-10
 Chester,45023,0.0,0.0,0.0,0.0,South Carolina,2026-07-10
 Chesterfield,45025,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-10
@@ -16,9 +16,9 @@ Clarendon,45027,0.0,0.0,0.0,0.0,South Carolina,2026-07-10
 Colleton,45029,0.4013,0.1326,0.1925,0.2524,South Carolina,2026-07-10
 Darlington,45031,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-10
 Dillon,45033,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-10
-Dorchester,45035,0.0345,0.0181,0.0439,0.0697,South Carolina,2026-07-10
+Dorchester,45035,0.0352,0.0181,0.0449,0.0717,South Carolina,2026-07-10
 Edgefield,45037,0.0027,0.0055,0.0055,0.0055,South Carolina,2026-07-10
-Fairfield,45039,1.0858,0.6602,0.6632,0.6662,South Carolina,2026-07-10
+Fairfield,45039,1.087,0.6602,0.6632,0.6662,South Carolina,2026-07-10
 Florence,45041,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-10
 Georgetown,45043,0.0004,0.0002,0.0002,0.0002,South Carolina,2026-07-10
 Greenville,45045,0.0,0.0,0.0,0.0,South Carolina,2026-07-10
@@ -34,11 +34,11 @@ Lexington,45063,0.0044,0.0017,0.0026,0.0035,South Carolina,2026-07-10
 Marion,45067,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-10
 Marlboro,45069,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-10
 Mccormick,45065,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-10
-Newberry,45071,0.0015,0.0004,0.0004,0.0004,South Carolina,2026-07-10
+Newberry,45071,0.0016,0.0004,0.0004,0.0004,South Carolina,2026-07-10
 Oconee,45073,0.0,0.0,0.0,0.0,South Carolina,2026-07-10
-Orangeburg,45075,0.0006,0.0007,0.0007,0.0007,South Carolina,2026-07-10
+Orangeburg,45075,0.0008,0.0007,0.0007,0.0007,South Carolina,2026-07-10
 Pickens,45077,0.0,0.0,0.0,0.0,South Carolina,2026-07-10
-Richland,45079,0.0041,0.0019,0.0022,0.0026,South Carolina,2026-07-10
+Richland,45079,0.0043,0.0019,0.0023,0.0028,South Carolina,2026-07-10
 Saluda,45081,0.0001,0.0002,0.0002,0.0002,South Carolina,2026-07-10
 Spartanburg,45083,0.0,0.0,0.0,0.0,South Carolina,2026-07-10
 Sumter,45085,0.0,0.0,0.0,0.0,South Carolina,2026-07-10
