@@ -1,6 +1,6 @@
 County,FIPS,SAIDI,LOWER_SAIFI,SAIFI,UPPER_SAIFI,State,Date
 Abbeville,45001,0.0002,0.0009,0.0009,0.0009,South Carolina,2026-07-19
-Aiken,45003,0.0015,0.0006,0.0006,0.0006,South Carolina,2026-07-19
+Aiken,45003,0.0015,0.0007,0.0007,0.0007,South Carolina,2026-07-19
 Allendale,45005,0.0003,0.0006,0.0006,0.0006,South Carolina,2026-07-19
 Anderson,45007,0.0,0.0,0.0,0.0,South Carolina,2026-07-19
 Bamberg,45009,0.0006,0.0003,0.0003,0.0003,South Carolina,2026-07-19
@@ -13,7 +13,7 @@ Cherokee,45021,0.0,0.0,0.0,0.0,South Carolina,2026-07-19
 Chester,45023,0.0,0.0,0.0,0.0,South Carolina,2026-07-19
 Chesterfield,45025,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-19
 Clarendon,45027,0.0,0.0,0.0,0.0,South Carolina,2026-07-19
-Colleton,45029,0.2647,0.0495,0.0556,0.0617,South Carolina,2026-07-19
+Colleton,45029,0.2649,0.0495,0.0556,0.0617,South Carolina,2026-07-19
 Darlington,45031,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-19
 Dillon,45033,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-19
 Dorchester,45035,0.0034,0.0022,0.0022,0.0022,South Carolina,2026-07-19
@@ -42,6 +42,6 @@ Richland,45079,0.0031,0.0006,0.0006,0.0006,South Carolina,2026-07-19
 Saluda,45081,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-19
 Spartanburg,45083,0.0,0.0,0.0,0.0,South Carolina,2026-07-19
 Sumter,45085,0.0,0.0,0.0,0.0,South Carolina,2026-07-19
-Union,45087,0.0018,0.0014,0.0014,0.0014,South Carolina,2026-07-19
+Union,45087,0.0022,0.0014,0.0014,0.0014,South Carolina,2026-07-19
 Williamsburg,45089,0.0,0.0,0.0,0.0,South Carolina,2026-07-19
 York,45091,0.0,0.0,0.0,0.0,South Carolina,2026-07-19
