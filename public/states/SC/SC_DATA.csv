@@ -1,6 +1,6 @@
 County,FIPS,SAIDI,LOWER_SAIFI,SAIFI,UPPER_SAIFI,State,Date
 Abbeville,45001,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-28
-Aiken,45003,0.0005,0.0002,0.0002,0.0002,South Carolina,2026-07-28
+Aiken,45003,0.0006,0.0005,0.0005,0.0005,South Carolina,2026-07-28
 Allendale,45005,0.0009,0.0009,0.0009,0.0009,South Carolina,2026-07-28
 Anderson,45007,0.0,0.0,0.0,0.0,South Carolina,2026-07-28
 Bamberg,45009,0.009,0.0016,0.0016,0.0016,South Carolina,2026-07-28
@@ -30,7 +30,7 @@ Kershaw,45055,0.0198,0.0159,0.0159,0.0159,South Carolina,2026-07-28
 Lancaster,45057,0.0,0.0,0.0,0.0,South Carolina,2026-07-28
 Laurens,45059,0.0,0.0,0.0,0.0,South Carolina,2026-07-28
 Lee,45061,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-28
-Lexington,45063,0.0054,0.0152,0.0155,0.0158,South Carolina,2026-07-28
+Lexington,45063,0.0055,0.0152,0.0155,0.0158,South Carolina,2026-07-28
 Marion,45067,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-28
 Marlboro,45069,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-28
 Mccormick,45065,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-28
@@ -40,7 +40,7 @@ Orangeburg,45075,0.0003,0.0002,0.0002,0.0002,South Carolina,2026-07-28
 Pickens,45077,0.0,0.0,0.0,0.0,South Carolina,2026-07-28
 Richland,45079,0.0097,0.0027,0.0028,0.0029,South Carolina,2026-07-28
 Saluda,45081,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-07-28
-Spartanburg,45083,0.0002,0.0004,0.0004,0.0004,South Carolina,2026-07-28
+Spartanburg,45083,0.0006,0.0021,0.0021,0.0021,South Carolina,2026-07-28
 Sumter,45085,0.0,0.0,0.0,0.0,South Carolina,2026-07-28
 Union,45087,0.0002,0.0003,0.0003,0.0003,South Carolina,2026-07-28
 Williamsburg,45089,0.0,0.0,0.0,0.0,South Carolina,2026-07-28
