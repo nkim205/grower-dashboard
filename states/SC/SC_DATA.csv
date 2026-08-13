@@ -1,10 +1,10 @@
 County,FIPS,SAIDI,LOWER_SAIFI,SAIFI,UPPER_SAIFI,State,Date
 Abbeville,45001,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-08-12
-Aiken,45003,0.0053,0.0051,0.0052,0.0053,South Carolina,2026-08-12
+Aiken,45003,0.0054,0.0051,0.0052,0.0053,South Carolina,2026-08-12
 Allendale,45005,0.0048,0.0012,0.0012,0.0012,South Carolina,2026-08-12
 Anderson,45007,0.0,0.0,0.0,0.0,South Carolina,2026-08-12
 Bamberg,45009,0.0003,0.0003,0.0003,0.0003,South Carolina,2026-08-12
-Barnwell,45011,0.0028,0.001,0.001,0.001,South Carolina,2026-08-12
+Barnwell,45011,0.0033,0.001,0.001,0.001,South Carolina,2026-08-12
 Beaufort,45013,0.0113,0.032,0.0321,0.0321,South Carolina,2026-08-12
 Berkeley,45015,0.0052,0.0048,0.0049,0.0051,South Carolina,2026-08-12
 Calhoun,45017,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-08-12
@@ -13,7 +13,7 @@ Cherokee,45021,0.0188,0.0076,0.0076,0.0076,South Carolina,2026-08-12
 Chester,45023,0.0,0.0,0.0,0.0,South Carolina,2026-08-12
 Chesterfield,45025,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-08-12
 Clarendon,45027,0.0,0.0,0.0,0.0,South Carolina,2026-08-12
-Colleton,45029,0.005,0.0035,0.0035,0.0035,South Carolina,2026-08-12
+Colleton,45029,0.0062,0.0035,0.0037,0.0039,South Carolina,2026-08-12
 Darlington,45031,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-08-12
 Dillon,45033,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-08-12
 Dorchester,45035,0.0009,0.0008,0.001,0.0012,South Carolina,2026-08-12
@@ -30,7 +30,7 @@ Kershaw,45055,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-08-12
 Lancaster,45057,0.0,0.0,0.0,0.0,South Carolina,2026-08-12
 Laurens,45059,0.0,0.0,0.0,0.0,South Carolina,2026-08-12
 Lee,45061,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-08-12
-Lexington,45063,0.0329,0.0164,0.0166,0.0167,South Carolina,2026-08-12
+Lexington,45063,0.033,0.0167,0.0169,0.0171,South Carolina,2026-08-12
 Marion,45067,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-08-12
 Marlboro,45069,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-08-12
 Mccormick,45065,0.0,<0.0001,<0.0001,<0.0001,South Carolina,2026-08-12
@@ -40,7 +40,7 @@ Orangeburg,45075,0.0006,0.0003,0.0003,0.0003,South Carolina,2026-08-12
 Pickens,45077,0.0,0.0,0.0,0.0,South Carolina,2026-08-12
 Richland,45079,0.0022,0.0022,0.0025,0.0027,South Carolina,2026-08-12
 Saluda,45081,0.0004,0.0002,0.0002,0.0002,South Carolina,2026-08-12
-Spartanburg,45083,0.0086,0.005,0.005,0.005,South Carolina,2026-08-12
+Spartanburg,45083,0.0087,0.005,0.005,0.005,South Carolina,2026-08-12
 Sumter,45085,0.0,0.0,0.0,0.0,South Carolina,2026-08-12
 Union,45087,0.3798,0.1163,0.4723,0.8283,South Carolina,2026-08-12
 Williamsburg,45089,0.0,0.0,0.0,0.0,South Carolina,2026-08-12
